@@ -1,0 +1,261 @@
+<!doctype html>
+<html ng-app="formValidate">
+  <head> 
+      <title> ACME User subscription </title>
+      <meta charset="utf-8">
+      <script src="JS/angular.min.js" type="text/javascript"> </script>
+      <link rel="stylesheet" href="CSS/index.css" rel="stylesheet" type="text/css"/>
+      <script src="JS/FormValidate.js" type="text/javascript"></script>
+  </head>
+
+  <body>
+
+  <h1> ACME - user subscription </h1>
+  <div ng-controller="validateController" id="container">
+  <form name="signup_form" validate ng-submit="signupForm()">
+
+
+  <!-- after th form validation - I want to display the details in a separate page - all the user details -->
+
+  <fieldset>
+    <legend>Subscription Form for - ACME </legend>
+        <hr>
+        <div class="row">
+          <div class="username">
+          <hr>
+            <label class="field"><span>*</span>Name:</label> 
+            <input type="text" 
+                placeholder="your full name" 
+                name="name" 
+                ng-class="{error: signup_form.name.$dirty && signup_form.name.$invalid}"
+                ng-model="signup.name" 
+                ng-pattern="/^(\D)+$/"
+                ng-minlength=3 
+                ng-maxlength=20 
+                required/>
+            <div class="error-container" 
+                ng-show="signup_form.name.$dirty && signup_form.name.$invalid">
+            <small class="error"
+              ng-show="signup_form.name.$error.pattern">
+              Enter text only , numbers not allowed
+            </small>
+            <small class="error" 
+                ng-show="signup_form.name.$error.required">
+                Your name is required and enter a valid name
+            </small>
+            <small class="error" 
+                    ng-show="signup_form.name.$error.minlength">
+                    Your name is required to be at least 3 characters
+            </small>
+            <small class="error" 
+                    ng-show="signup_form.name.$error.maxlength">
+                    Your name cannot be longer than 20 characters
+            </small>
+          </div>
+          </div>
+      </div>
+      
+
+        <div class="row">
+          <div class="usergender">
+            <label class="field"><span>*</span>Gender</label>
+            <input type="radio" ng-model="gender" value="male" name="male" ng-required="!gender"> Male 
+            <input type="radio" ng-model="gender" value="female" name="female" ng-required="!gender"> Female 
+          </div>
+        </div>
+
+      <div class="row">          
+          <div class="usermail">
+            <label  class="field"><span>*</span>E-mail:</label>
+            <input type="email" 
+              placeholder="your e-mail" 
+              name="email" 
+              ng-model="signup.email" 
+              ng-minlength=10 
+              ng-maxlength=30 required/>
+            <div class="error-container" 
+                 ng-show="signup_form.email.$dirty && signup_form.email.$invalid">
+              <small class="error" 
+                     ng-show="signup_form.email.$error.required">
+                     Your email is required.
+              </small>
+              <small class="error" 
+                     ng-show="signup_form.email.$error.minlength">
+                      Your email is required to be at least 10 characters
+              </small>
+              <small class="error" 
+                     ng-show="signup_form.email.$error.email">
+                     That is not a valid email. Please enter a valid email.
+              </small>
+              <small class="error" 
+                     ng-show="signup_form.email.$error.maxlength">
+                      Your email cannot be longer than 30 characters
+              </small>
+            </div>
+          </div>
+      </div> 
+
+      <div class="row">          
+          <div class="usermobile">
+            <label class="field"><span>*</span>Tel.Phone:</label>
+            <input type="number" 
+              placeholder="your mobile number" 
+              name="contactno" 
+              ng-model="signup.contactno" 
+              ng-pattern="/^(\d)+$/"
+              ng-minlength=10 
+              ng-maxlength=15 required />
+            <div class="error-container" 
+                 ng-show="signup_form.contactno.$dirty && signup_form.contactno.$invalid">
+              <small class="error"
+                     ng-show="signup_form.contactno.$error.pattern">
+                     Your mobile no should not contain characters 
+              </small>
+              <small class="error" 
+                     ng-show="signup_form.contactno.$error.required">
+                     Your mobile number is required and enter a valid number.
+              </small>
+              <small class="error" 
+                     ng-show="signup_form.contactno.$error.minlength">
+                     Your mobile number is required to be at least 10 numbers
+              </small>
+              
+              <small class="error" 
+                     ng-show="signup_form.contactno.$error.maxlength">
+                     Your mobile number cannot be longer than 20 numbers
+              </small>
+            </div>
+          </div>
+      </div> 
+
+      <div class="row">          
+          <div class="user-landlineno">
+            <label class="field">Phone:</label>
+            <input type="number" 
+              placeholder="your landline number" 
+              name="landlineno" 
+              ng-model="signup.landlineno">
+          </div>
+      </div>
+        
+       <div class="row">
+         <div class="useradress">
+            <label class="field"><span>*</span>Address</label> <br> <hr>
+              <label class="field"> <span>*</span>No </label>
+              <input type="number"
+                placeholder="your doorno",
+                name="doorno"
+                ng-model="signup.doorno" 
+                ng-minlength="1" 
+                ng-maxlength="5" 
+                ng-pattern="/^(\d)+$/" required/>
+              <div class="error-container" ng-show="signup_form.doorno.$dirty && signup_form.doorno.$invalid">
+                <small class="error"
+                     ng-show="signup_form.doorno.$error.pattern">
+                     Your no shoud not contain characters, Please re enter the door no correctly 
+                </small>
+                <small class="error" 
+                     ng-show="signup_form.doorno.$error.minlength">
+                      Please door no is required to be  at least 1 number 
+                </small>
+                <small class="error"
+                   ng-show="signup_form.doorno.$error.required">
+                    your number is required and enter a valid number
+                </small>
+                <small class="error"
+                     ng-show="signup_form.doorno.$error.maxlength">
+                     You door no cannot be longer than 5 numbers. Please check it 
+                </small>
+               </div> 
+            </div>
+
+               <label class="field"><span>*</span>Street:</label>
+               <input type="text" 
+                    name="street"
+                    placeholder="your streetname"
+                    ng-model="signup.street"
+                    ng-minlength="3"
+                    ng-pattern="/^(\D)+$/"
+                    ng-maxlength="20" required/>
+                <div class="error-container" ng-show="signup_form.street.$dirty && signup_form.street.$invalid">
+                   <small class="error"
+                      ng-show="signup_form.street.$error.required">
+                      Your streetname is missing, Please enter your streetname 
+                   </small>
+                   <small class="error"
+                      ng-show="signup_form.street.$error.pattern">
+                      Your street name should not contain numbers, Please re-nter the name correctly 
+                   </small>
+                   <small class="error"
+                       ng-show="signup_form.street.$error.maxlength">
+                       You street name cannot be longer than 20 characters. Please check it 
+                   </small>
+                   <small class="error"
+                       ng-show="signup_form.street.$error.minlength">
+                       You street name cannot be less than 4 characters. Please check it 
+                   </small>
+                </div> <br>
+
+               <label class="field"><span>*</span>City:</label>
+               <input type="text" 
+                    name="city"
+                    placeholder="your city name"
+                    ng-model="signup.city"
+                    ng-minlength="4"
+                    ng-maxlength="20" 
+                    ng-pattern="/^(\D)+$/" required/>
+
+               <div class="error-container" ng-show="signup_form.city.$dirty && signup_form.city.$invalid">
+                   <small class="error"
+                      ng-show="signup_form.city.$error.pattern">
+                      Your city name should not contain numbers, Please renter the name correctly 
+                   </small>
+                   <small class="error"
+                      ng-show="signup_form.city.$error.required">
+                      Your city name is missing , Please enter the city name
+                   </small>
+                   <small class="error"
+                       ng-show="signup_form.city.$error.maxlength">
+                       You city name cannot be longer than 20 characters. Please check it 
+                   </small>
+                   <small class="error"
+                       ng-show="signup_form.city.$error.minlength">
+                       You city name is required to be atleast 4 characters. Please check it 
+                   </small>
+                </div> <br>
+
+                <div class="row">          
+              <div class="large-12 columns">
+                <label class="field"><span>*</span>Zipcode:</label>
+                <input type="number" 
+                    placeholder="your zipcode" 
+                    name="zipcode" 
+                    ng-model="signup.zipcode" 
+                    ng-minlength=3 ng-maxlength=20 required/>
+                <div class="error-container" 
+                     ng-show="signup_form.zipcode.$dirty && signup_form.zipcode.$invalid">
+                  <small class="error" 
+                         ng-show="signup_form.zipcode.$error.required">
+                         Your zip code is required and enter a valid zipcode
+                  </small>
+                <small class="error" 
+                           ng-show="signup_form.zipcode.$error.minlength">
+                            Your zip code is required to be at least 3 characters
+                </small>
+              
+                  <small class="error" 
+                         ng-show="signup_form.zipcode.$error.maxlength">
+                          Your zip code cannot be longer than 20 characters
+                  </small>
+            </div>
+          </div>
+      </div><hr> <br>
+    <button type="submit" class="button-radius" name="subscribe">Subscribe</button>
+
+    <p id="mandatory"> * - Mandatory fields </p> <hr>
+  </fieldset>
+  </form>
+
+</div>
+</body>
+</html>
